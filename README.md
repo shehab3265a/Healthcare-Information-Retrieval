@@ -12,12 +12,12 @@ A team project (6 members) implementing an Information Retrieval pipeline over t
 
 | Member | Responsibility | Main deliverables |
 |---|---|---|
-| **Shehab Mohsen** (Person 1) | Spark Positional Index (Part A) | Tokenization, positional index, source code, index output |
-| **Youssef Sedky** (Person 2) | TF, DF & IDF | Term-frequency data, document frequencies, IDF values |
-| **Mounir Mohamed** (Person 3) | TF-IDF & Normalization | TF-IDF matrix, vector lengths, normalized matrix |
-| **Ahmed Reda** (Person 4) | Phrase Queries & Ranking | Search for `patient care` and `medical research`, matching documents and similarity ranking |
-| **Gerges Tamer** (Person 5) | Boolean Queries & Ranking | `patient care AND medical research` and `patient care AND NOT medical research`, results and ranking |
-| **Ziad Mamdouh** (Person 6) | Integration, Testing & Documentation | Project structure, integration, testing, screenshots, final report and submission |
+| **Shehab Mohsen**  | Spark Positional Index (Part A) | Tokenization, positional index, source code, index output |
+| **Youssef Sedky**  | TF, DF & IDF | Term-frequency data, document frequencies, IDF values |
+| **Mounir Mohamed**  | TF-IDF & Normalization | TF-IDF matrix, vector lengths, normalized matrix |
+| **Ahmed Reda**  | Phrase Queries & Ranking | Search for `patient care` and `medical research`, matching documents and similarity ranking |
+| **Gerges Tamer**  | Boolean Queries & Ranking | `patient care AND medical research` and `patient care AND NOT medical research`, results and ranking |
+| **Ziad Mamdouh**  | Integration, Testing & Documentation | Project structure, integration, testing, screenshots, final report and submission |
 
 ## Dataset
 
