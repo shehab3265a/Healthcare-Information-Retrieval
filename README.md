@@ -87,12 +87,12 @@ Explain the following concepts and results:
 
 | Member | Assigned responsibility |
 |---|---|
-| **Shehab Mohsen** — Person 1 | **Spark Positional Index (Part A):** Read the ten dataset documents using Spark, tokenize the text, build the Positional Index with 1-based token positions, and provide the source code and index output. |
-| **Youssef Sedky** — Person 2 | **TF, DF & IDF:** Calculate and display Term Frequency for every term in every document, Document Frequency for every term, and the corresponding IDF values. |
-| **Mounir Mohamed** — Person 3 | **TF-IDF & Normalization:** Build the TF-IDF matrix, calculate document vector lengths, and produce the Normalized TF-IDF matrix. |
-| **Ahmed Reda** — Person 4 | **Phrase Queries & Ranking:** Implement the assigned phrase queries `patient care` and `medical research`, identify matching documents using positional information, calculate similarity scores, and rank the matching documents. |
-| **Gerges Tamer** — Person 5 | **Boolean Queries & Ranking:** Implement `patient care AND medical research` and `patient care AND NOT medical research`, display matching documents, and rank the returned documents using similarity scores. |
-| **Ziad Mamdouh** — Person 6 | **Integration, Testing & Documentation:** Integrate the project parts, test the required functions and queries, collect outputs and screenshots, and prepare the explanations and final submission. |
+| **Shehab Mohsen** | **Spark Positional Index (Part A):** Read the ten dataset documents using Spark, tokenize the text, build the Positional Index with 1-based token positions, and provide the source code and index output. |
+| **Youssef Sedky** | **TF, DF & IDF:** Calculate and display Term Frequency for every term in every document, Document Frequency for every term, and the corresponding IDF values. |
+| **Mounir Mohamed** | **TF-IDF & Normalization:** Build the TF-IDF matrix, calculate document vector lengths, and produce the Normalized TF-IDF matrix. |
+| **Ahmed Reda** | **Phrase Queries & Ranking:** Implement the assigned phrase queries `patient care` and `medical research`, identify matching documents using positional information, calculate similarity scores, and rank the matching documents. |
+| **Gerges Tamer** | **Boolean Queries & Ranking:** Implement `patient care AND medical research` and `patient care AND NOT medical research`, display matching documents, and rank the returned documents using similarity scores. |
+| **Ziad Mamdouh** | **Integration, Testing & Documentation:** Integrate the project parts, test the required functions and queries, collect outputs and screenshots, and prepare the explanations and final submission. |
 
 ## Shared Project Requirements
 
