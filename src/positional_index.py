@@ -4,6 +4,11 @@ from pathlib import Path
 from pyspark.sql import SparkSession
 
 
+def get_doc_id(path):
+    # file:///.../dataset/d1.txt  ->  d1
+    return path.split("/")[-1].rsplit(".", 1)[0]
+
+
 def tokenize_document(document):
     doc_id, content = document
 
@@ -25,18 +30,10 @@ def main():
 
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Read files using Python instead of Hadoop
-    files = sorted(dataset_dir.glob("*.txt"))
-
-    if not files:
+    if not any(dataset_dir.glob("*.txt")):
         raise FileNotFoundError(
             f"No text files found in: {dataset_dir}"
         )
-
-    documents = [
-        (file.stem, file.read_text(encoding="utf-8"))
-        for file in files
-    ]
 
     # Start Spark
     spark = (
@@ -51,8 +48,11 @@ def main():
     try:
         sc = spark.sparkContext
 
-        # Send documents to Spark
-        documents_rdd = sc.parallelize(documents)
+        # Read the documents using Spark: (file_path, file_content)
+        documents_rdd = (
+            sc.wholeTextFiles(dataset_dir.as_uri() + "/*.txt")
+            .map(lambda pair: (get_doc_id(pair[0]), pair[1]))
+        )
 
         # Generate (term, (document, position))
         term_positions_rdd = documents_rdd.flatMap(
@@ -96,7 +96,7 @@ def main():
                 ensure_ascii=False
             )
 
-        print(f"Documents processed: {len(documents)}")
+        print(f"Documents processed: {documents_rdd.count()}")
         print(f"Unique terms: {len(sorted_index)}")
         print(f"Positional Index saved to: {output_file}")
 
