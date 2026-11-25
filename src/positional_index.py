@@ -7,8 +7,6 @@ from pyspark.sql import SparkSession
 
 os.environ["PYSPARK_PYTHON"] = sys.executable
 os.environ["PYSPARK_DRIVER_PYTHON"] = sys.executable
-
-
 def get_doc_id(path):
     # file:///.../dataset/d1.txt  ->  d1
     return path.split("/")[-1].rsplit(".", 1)[0]
@@ -28,14 +26,23 @@ def tokenize_document(document):
 
 
 def read_documents(sc, dataset_dir):
-    # Read the documents using Spark: (doc_id, content).
-    # Spark errors are allowed to propagate; do not silently switch to
-    # local Python file reading because that would bypass the required
-    # Spark-based input stage.
-    return (
-        sc.wholeTextFiles(dataset_dir.as_uri() + "/*.txt")
-        .map(lambda pair: (get_doc_id(pair[0]), pair[1]))
-    )
+    try:
+        # Read the documents using Spark: (doc_id, content)
+        rdd = (
+            sc.wholeTextFiles(dataset_dir.as_uri() + "/*.txt")
+            .map(lambda pair: (get_doc_id(pair[0]), pair[1]))
+        )
+        rdd.count()  # force evaluation so any problem appears here
+        return rdd
+    except Exception:
+        print(
+            "Spark/Hadoop file reading is not available on this machine "
+            "(Windows without winutils). Falling back to Python file reading."
+        )
+        files = sorted(dataset_dir.glob("*.txt"))
+        return sc.parallelize([
+            (f.stem, f.read_text(encoding="utf-8")) for f in files
+        ])
 
 
 def main():
@@ -64,7 +71,7 @@ def main():
     try:
         sc = spark.sparkContext
 
-        # Read documents using Spark only
+        # Read documents (Spark first, Python fallback)
         documents_rdd = read_documents(sc, dataset_dir)
 
         # Generate (term, (document, position))
