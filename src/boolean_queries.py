@@ -31,7 +31,7 @@ def phrase_sets_from_results(results: Mapping[str, object]):
 
 
 def evaluate_boolean(phrase_sets):
-    """Evaluate the two project Boolean queries from Person 4's phrase sets."""
+    """Evaluate the project Boolean queries using set operations."""
     patient_care = set(phrase_sets["patient care"])
     medical_research = set(phrase_sets["medical research"])
     return {
@@ -81,19 +81,18 @@ def rank_documents(index: PostingIndex, documents, query_terms):
 def run_boolean_queries(index, phrase_results):
     phrase_sets = phrase_sets_from_results(phrase_results)
     matches = evaluate_boolean(phrase_sets)
+    and_docs = matches["patient care AND medical research"]
+    and_not_docs = matches["patient care AND NOT medical research"]
     return {
         "patient care AND medical research": {
-            "matching_documents": matches["patient care AND medical research"],
+            "matching_documents": and_docs,
             "ranking": rank_documents(
-                index, matches["patient care AND medical research",
-                ["patient", "care", "medical", "research"]),
+                index, and_docs, ["patient", "care", "medical", "research"]),
             "logic": "intersection of the two phrase-match sets",
         },
         "patient care AND NOT medical research": {
-            "matching_documents": matches["patient care AND NOT medical research"],
-            "ranking": rank_documents(
-                index, matches["patient care AND NOT medical research",
-                ["patient", "care"]),
+            "matching_documents": and_not_docs,
+            "ranking": rank_documents(index, and_not_docs, ["patient", "care"]),
             "logic": "patient care phrase matches excluding medical research phrase matches",
         },
     }
