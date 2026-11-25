@@ -19,7 +19,7 @@ Only exact phrase matches are ranked. The module constructs sparse document
 vectors from the positional index using raw term frequency and smoothed IDF:
 
 - TF(t,d) = number of positions recorded for term t in document d.
-- IDF(t) = ln((1 + N) / (1 + DF(t))) + 1.
+- IDF(t) = log10(N / DF(t)), rounded to 4 decimal places (same formula as Task 2).
 - TF-IDF(t,d) = TF(t,d) × IDF(t).
 
 The query vector uses the phrase's term frequencies with the same IDF weights.
@@ -28,10 +28,9 @@ Each matching document receives cosine similarity:
 cos(q,d) = (q · d) / (||q|| × ||d||)
 
 Results are sorted by descending similarity, then document ID for stable ties.
-This makes the module self-contained and does not depend on Person 3's output
-file; it recomputes TF-IDF from the shared positional index. If the team later
-standardizes a separate TF-IDF matrix interface, the ranking function can be
-adapted to consume those vectors instead.
+This keeps Task 4 consistent with Task 2's `output/tf_df_idf.json` IDF values.
+The module recomputes the weights from the shared positional index using the
+same base-10 logarithm and four-decimal rounding.
 
 ## Run
 From the repository root, after generating the positional index:
