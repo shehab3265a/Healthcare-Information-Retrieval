@@ -1,0 +1,15 @@
+{
+    "patient care AND medical research": {
+        "matching_documents": ["d5"],
+        "ranking": [{"document": "d5", "similarity": 0.835320}],
+        "logic": "intersection of the two phrase-match sets"
+    },
+    "patient care AND NOT medical research": {
+        "matching_documents": ["d1", "d6"],
+        "ranking": [
+            {"document": "d1", "similarity": 1.000000},
+            {"document": "d6", "similarity": 0.225299}
+        ],
+        "logic": "patient care phrase matches excluding medical research phrase matches"
+    }
+}
