@@ -53,7 +53,7 @@ def phrase_matches(index: PostingIndex, phrase: str) -> List[str]:
 
 
 def build_document_vectors(index: PostingIndex):
-    """Build TF-IDF vectors from positional postings (raw TF, smoothed IDF)."""
+    """Build TF-IDF vectors using the project-wide Task 2 IDF formula."""
     documents = sorted({doc for postings in index.values() for doc in postings})
     n_docs = len(documents)
     vectors: Dict[str, Dict[str, float]] = {doc: {} for doc in documents}
@@ -64,8 +64,8 @@ def build_document_vectors(index: PostingIndex):
     idf: Dict[str, float] = {}
     for term, postings in index.items():
         df = len(postings)
-        # Smoothed IDF avoids zero weights and remains defined for all terms.
-        idf[term] = math.log((1 + n_docs) / (1 + df)) + 1.0
+        # Task 2 formula: IDF = log10(N / DF), rounded to four decimals.
+        idf[term] = round(math.log10(n_docs / df), 4) if df > 0 else 0.0
         for doc_id, positions in postings.items():
             tf = len(positions)
             vectors[doc_id][term] = tf * idf[term]
