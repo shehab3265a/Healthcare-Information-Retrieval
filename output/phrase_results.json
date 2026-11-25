@@ -8,15 +8,15 @@
         "ranking": [
             {
                 "document": "d1",
-                "similarity": 1
+                "similarity": 1.0000000000000002
             },
             {
                 "document": "d5",
-                "similarity": 0.710003
+                "similarity": 0.7100030638423152
             },
             {
                 "document": "d6",
-                "similarity": 0.225299
+                "similarity": 0.2252991168382427
             }
         ]
     },
@@ -29,15 +29,15 @@
         "ranking": [
             {
                 "document": "d5",
-                "similarity": 0.531293
+                "similarity": 0.5312927904438103
             },
             {
                 "document": "d3",
-                "similarity": 0.4715
+                "similarity": 0.4715001659550163
             },
             {
                 "document": "d8",
-                "similarity": 0.296953
+                "similarity": 0.2969533275321274
             }
         ]
     }
